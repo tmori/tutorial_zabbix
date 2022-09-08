@@ -39,16 +39,14 @@ if [ ${OS_TYPE} != "Mac" ]
 then
 docker run \
 	-v ${MY_TOP_DIR}/volumes/tools:/root/workspace/tools \
-	-v ${MY_TOP_DIR}/volumes/etc/postgresql:/etc/postgresql \
-	-v ${MY_TOP_DIR}/volumes/etc/postgresql-common:/etc/postgresql-common \
-	-v ${MY_TOP_DIR}/volumes/var/lib/postgresql:/var/lib/postgresql \
 	-it --rm \
 	--net host \
 	-e CORE_IPADDR=${IPADDR} \
 	-e OS_TYPE=${OS_TYPE} \
 	--name tutorial ${DOCKER_IMAGE} 
 else
-docker run -v ${MY_TOP_DIR}/volumes:/root/workspace/volumes \
+docker run \
+	-v ${MY_TOP_DIR}/volumes/tools:/root/workspace/tools \
 	-it --rm \
 	--ip ${IPADDR} -p 10000:10000 \
 	-e CORE_IPADDR=${IPADDR} \
