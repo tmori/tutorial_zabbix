@@ -39,18 +39,19 @@ if [ ${OS_TYPE} != "Mac" ]
 then
 docker run \
 	-v ${MY_TOP_DIR}/volumes/tools:/root/workspace/tools \
+	-v ${MY_TOP_DIR}/volumes/zabbix:/root/workspace/zabbix \
+	-v ${MY_TOP_DIR}/volumes/zabbix/web:/etc/zabbix/web \
 	-it --rm \
 	--net host \
-	-e CORE_IPADDR=${IPADDR} \
+	-e TZ=Asia/Tokyo \
 	-e OS_TYPE=${OS_TYPE} \
 	--name tutorial ${DOCKER_IMAGE} 
 else
 docker run \
 	-v ${MY_TOP_DIR}/volumes/tools:/root/workspace/tools \
+	-v ${MY_TOP_DIR}/volumes/zabbix:/root/workspace/zabbix \
 	-it --rm \
-	--ip ${IPADDR} -p 10000:10000 \
-	-e CORE_IPADDR=${IPADDR} \
-	-e ROS_UNITY_IPADDR=${IPADDR} \
+	-e TZ=Asia/Tokyo \
 	-e OS_TYPE=${OS_TYPE} \
 	--name tutorial ${DOCKER_IMAGE} 
 fi
