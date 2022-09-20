@@ -2,9 +2,14 @@ FROM ubuntu:20.04 as tutorial-zabbix
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+# locales
+RUN apt-get  update
+RUN apt-get install -y language-pack-ja
+RUN locale-gen ja_JP.UTF-8
+RUN update-locale LANG=ja_JP.UTF-8
+
 
 # install zabbix
-RUN apt-get  update
 RUN apt-get install -y wget
 RUN wget https://repo.zabbix.com/zabbix/6.2/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.2-2%2Bubuntu20.04_all.deb
 RUN dpkg -i zabbix-release_6.2-2+ubuntu20.04_all.deb
@@ -16,10 +21,6 @@ RUN apt-get install -y vim
 
 RUN mkdir /root/workspace
 WORKDIR /root/workspace
-
-COPY volumes/zabbix/zabbix.conf .
-RUN cp zabbix.conf /etc/zabbix/nginx.conf
-RUN rm -f zabbix.conf
 
 RUN apt-get install -y nginx
 RUN apt-get install -y lsof net-tools
@@ -33,8 +34,4 @@ RUN rm -f default
 RUN apt-get install -y gzip
 #RUN zcat /usr/share/doc/zabbix-sql-scripts/postgresql/server.sql.gz > create.sql
 
-# locales
-RUN apt-get install -y language-pack-ja
-RUN locale-gen ja_JP.UTF-8
-RUN update-locale LANG=ja_JP.UTF-8
 

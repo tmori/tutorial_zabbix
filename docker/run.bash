@@ -40,7 +40,7 @@ then
 docker run \
 	-v ${MY_TOP_DIR}/volumes/tools:/root/workspace/tools \
 	-v ${MY_TOP_DIR}/volumes/zabbix:/root/workspace/zabbix \
-	-v ${MY_TOP_DIR}/volumes/zabbix/web:/etc/zabbix/web \
+	-v ${MY_TOP_DIR}/volumes/zabbix:/etc/zabbix \
 	-it --rm \
 	--net host \
 	-e TZ=Asia/Tokyo \
